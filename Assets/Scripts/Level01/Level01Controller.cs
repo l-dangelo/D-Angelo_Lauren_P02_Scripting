@@ -10,7 +10,6 @@ public class Level01Controller : MonoBehaviour
     [SerializeField] Text _currentHealthTextView = null;
     [SerializeField] GameObject _player = null;
     [SerializeField] GameObject _pauseMenu = null;
-    [SerializeField] GameObject _deathMenu = null;
 
     int _currentScore;
 
@@ -33,13 +32,11 @@ public class Level01Controller : MonoBehaviour
         if (!isActive)
         {
             _pauseMenu.SetActive(true);
-            _deathMenu.SetActive(false);
             Cursor.lockState = CursorLockMode.None;
         }
         else if (isActive)
         {
             _pauseMenu.SetActive(false);
-            _deathMenu.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
         }        
     }
