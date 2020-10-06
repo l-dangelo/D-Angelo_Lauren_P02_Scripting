@@ -7,7 +7,7 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance = null;
 
-    AudioSource _audSource;
+    AudioSource _audSource = null;
 
     private void Awake()
     {
