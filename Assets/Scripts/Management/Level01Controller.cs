@@ -12,6 +12,7 @@ public class Level01Controller : MonoBehaviour
     [SerializeField] GameObject _pauseMenu = null;
 
     int _currentScore;
+    bool _pauseMenuActive = false;
 
     void Update()
     {
@@ -28,17 +29,25 @@ public class Level01Controller : MonoBehaviour
 
     public void escapeToggle()
     {
-        bool isActive = _pauseMenu.activeSelf;
-        if (!isActive)
+        if (!_pauseMenuActive)
         {
             _pauseMenu.SetActive(true);
+            _pauseMenuActive = true;
             Cursor.lockState = CursorLockMode.None;
+            _player.GetComponent<PlayerMovement>().SetMove(false);
         }
-        else if (isActive)
+        else if (_pauseMenuActive)
         {
             _pauseMenu.SetActive(false);
+            _pauseMenuActive = false;
             Cursor.lockState = CursorLockMode.Locked;
-        }        
+            _player.GetComponent<PlayerMovement>().SetMove(true);
+        }     
+    }
+
+    public bool GetPauseMenuActivity()
+    {
+        return _pauseMenuActive;
     }
 
     public void ExitLevel()
@@ -64,11 +73,6 @@ public class Level01Controller : MonoBehaviour
     {
         _pauseMenu.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
-    }
-
-    public void quitGameFromPause()
-    {
-        Application.Quit();
     }
 
     public void displayHealth()

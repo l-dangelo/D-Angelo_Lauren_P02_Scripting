@@ -2,16 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] float currentHealth = 100;
     [SerializeField] float maxHealth = 100;
     [SerializeField] HealthBar _bar = null;
-    [SerializeField] GameObject _deathPanel = null;
+    [SerializeField] FireWeapon _player = null;
 
     public void reduceHealth(float amount)
     {
+        if (_player._shieldState)
+        {
+            amount = amount / 2;
+        }
+
         currentHealth -= amount;
         _bar.SetHealthBar(currentHealth/100);
         Debug.Log(currentHealth);
@@ -40,7 +46,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if(currentHealth <= 0)
         {
-            _deathPanel.SetActive(true);
+            SceneManager.LoadScene("DeathMenu");
         }
     }
 }
