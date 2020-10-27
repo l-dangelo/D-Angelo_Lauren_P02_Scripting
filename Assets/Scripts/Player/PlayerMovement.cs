@@ -62,9 +62,4 @@ public class PlayerMovement : MonoBehaviour
     {
         _canMove = moveability;
     }
-
-    public void HitActivity()
-    {
-        Vector3 currentTransform = transform.position;
-    }
 }

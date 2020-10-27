@@ -8,6 +8,7 @@ public class enemyDamage : MonoBehaviour
     float _health = 100;
     public bool _followPlayer = false;
     [SerializeField] GameObject _player = null;
+    [SerializeField] Level01Controller _levelController = null;
 
     NavMeshAgent _navMesh;
 
@@ -33,6 +34,7 @@ public class enemyDamage : MonoBehaviour
         if(_health <= 0)
         {
             this.gameObject.SetActive(false);
+            _levelController.IncreaseScore(10);
         }
     }
 

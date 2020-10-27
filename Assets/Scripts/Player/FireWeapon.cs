@@ -12,6 +12,7 @@ public class FireWeapon : MonoBehaviour
     [SerializeField] GameObject _hitFeedback = null;
     [SerializeField] float _weaponDamage = 20;
     [SerializeField] LayerMask _hitLayers;
+    [SerializeField] AudioSource _shootAudio = null;
 
     [Header("Shielding")]
     [SerializeField] GameObject _shield = null;
@@ -64,9 +65,8 @@ public class FireWeapon : MonoBehaviour
         {
             if (objectHit.transform.tag.Equals("Enemy"))
             {
-                Debug.Log("Hit " + objectHit.transform.name);
+                Debug.Log("Player Hit " + objectHit.transform.name);
                 _hitFeedback.transform.position = objectHit.point;
-                _player.GetComponent<PlayerMovement>().HitActivity();
 
                 enemyDamage shooter = objectHit.transform.gameObject.GetComponent<enemyDamage>();
                 if (shooter != null)
@@ -77,8 +77,9 @@ public class FireWeapon : MonoBehaviour
         }
         else
         {
-            Debug.Log("Miss");
+            Debug.Log("Player Miss");
         }
+        _shootAudio.Play();
     }
 
     void Shield()

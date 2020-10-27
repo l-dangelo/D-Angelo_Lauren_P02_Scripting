@@ -6,6 +6,7 @@ public class damageVolume : MonoBehaviour
 {
     [SerializeField] int _damageAmount = 1;
     [SerializeField] float _damageInterval = 0.5f;
+    [SerializeField] AudioSource _damage = null;
 
     bool _isCollided = false;
     PlayerHealth _collided = null;
@@ -14,11 +15,13 @@ public class damageVolume : MonoBehaviour
     {
         _isCollided = true;
         _collided = other.gameObject.GetComponent<PlayerHealth>();
+        _damage.Play();
     }
 
     private void OnTriggerExit(Collider other)
     {
         _isCollided = false;
+        _damage.Stop();
     }
 
     private void Update()
@@ -41,6 +44,5 @@ public class damageVolume : MonoBehaviour
     void dealDamage()
     {
         _collided.reduceHealth(_damageAmount);
-        _collided.kill();
     }
 }

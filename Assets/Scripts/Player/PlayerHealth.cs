@@ -10,6 +10,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] float maxHealth = 100;
     [SerializeField] HealthBar _bar = null;
     [SerializeField] FireWeapon _player = null;
+    [SerializeField] AudioSource _takeDamageAudio = null;
 
     public void reduceHealth(float amount)
     {
@@ -21,6 +22,9 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= amount;
         _bar.SetHealthBar(currentHealth/100);
         Debug.Log(currentHealth);
+        _takeDamageAudio.Play();
+
+        kill();
     }
 
     public void gainHealth(float amount)

@@ -11,19 +11,24 @@ public class Level01Controller : MonoBehaviour
     [SerializeField] GameObject _player = null;
     [SerializeField] GameObject _pauseMenu = null;
 
+    [Header("Scripts to Turn Off")]
+    [SerializeField] FireWeapon _fireWeapon = null;
+    [SerializeField] weaponFire _weaponFire = null;
+
     int _currentScore;
     bool _pauseMenuActive = false;
+
+    private void Start()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             escapeToggle();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            IncreaseScore(5);
         }
     }
 
@@ -33,6 +38,9 @@ public class Level01Controller : MonoBehaviour
         {
             _pauseMenu.SetActive(true);
             _pauseMenuActive = true;
+            _fireWeapon.enabled = false;
+            _weaponFire.enabled = false;
+            Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             _player.GetComponent<PlayerMovement>().SetMove(false);
         }
@@ -40,6 +48,8 @@ public class Level01Controller : MonoBehaviour
         {
             _pauseMenu.SetActive(false);
             _pauseMenuActive = false;
+            _fireWeapon.enabled = true;
+            _weaponFire.enabled = true;
             Cursor.lockState = CursorLockMode.Locked;
             _player.GetComponent<PlayerMovement>().SetMove(true);
         }     
